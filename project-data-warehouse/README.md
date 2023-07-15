@@ -1,0 +1,3 @@
+Requirements
+- psycopg2
+- boto3 botocore pandas psycopg2 psycopg2-binary
