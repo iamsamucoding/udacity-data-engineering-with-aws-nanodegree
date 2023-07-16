@@ -137,18 +137,41 @@ FORMAT AS JSON 'auto';
 
 # FINAL TABLES
 songplay_table_insert = ("""
+INSERT INTO songplays (start_time, user_id, level, song_id, artist_id, session_id, location, user_agent)
+SELECT DISTINCT TIMESTAMP 'epoch' + e.ts/1000 * INTERVAL '1 second', e.userId, e.level, s.song_id, s.artist_id, e.sessionId, s.artist_location, e.userAgent
+FROM staging_events AS e
+JOIN staging_songs as s ON (e.artist = s.artist_name AND e.song = s.title)
+WHERE e.page = 'NextSong';
 """)
 
 user_table_insert = ("""
+INSERT INTO users (user_id, first_name, last_name, gender, level)
+SELECT DISTINCT userId, firstName, lastName, gender, level
+FROM staging_events WHERE (page = 'NextSong') AND (userId IS NOT NULL);
 """)
 
 song_table_insert = ("""
+INSERT INTO songs (song_id, title, artist_id, year, duration)
+SELECT DISTINCT song_id, title, artist_id, year, duration
+FROM staging_songs WHERE (song_id IS NOT NULL) AND (artist_id IS NOT NULL);
 """)
 
 artist_table_insert = ("""
+INSERT INTO artists (artist_id, name, location, lattitude, longitude)
+SELECT DISTINCT artist_id, artist_name, artist_location, artist_latitude, artist_longitude
+FROM staging_songs WHERE artist_id IS NOT NULL;
 """)
 
 time_table_insert = ("""
+INSERT INTO time (start_time, hour, day, week, month, year, weekday)
+SELECT DISTINCT TIMESTAMP 'epoch' + ts/1000 * INTERVAL '1 second' AS start_time,
+                EXTRACT(hour FROM start_time)                     AS hour,
+                EXTRACT(day FROM start_time)                      AS day,
+                EXTRACT(week FROM start_time)                     AS week,
+                EXTRACT(month FROM start_time)                    AS month,
+                EXTRACT(year FROM start_time)                     AS year,
+                EXTRACT(dayofweek FROM start_time)                AS weekday
+FROM staging_events WHERE page = 'NextSong';
 """)
 
 

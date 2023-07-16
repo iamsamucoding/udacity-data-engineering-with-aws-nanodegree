@@ -17,7 +17,7 @@ def load_staging_tables(cur, conn):
 
 
 def insert_tables(cur, conn):
-    for query in insert_table_queries:
+    for i, query in enumerate(insert_table_queries):
         print(f'\t- Query {i+1}/{len(insert_table_queries)}')
 
         print('\t\t- Executing')
@@ -47,8 +47,8 @@ def main():
     print('- Loading Staging Tables')
     load_staging_tables(cur, conn)
 
-    # print('- Inserting Tables')
-    # insert_tables(cur, conn)
+    print('- Inserting Tables')
+    insert_tables(cur, conn)
 
     print('- Closing connection')
     conn.close()
