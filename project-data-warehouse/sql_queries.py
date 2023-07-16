@@ -173,6 +173,62 @@ SELECT DISTINCT TIMESTAMP 'epoch' + ts/1000 * INTERVAL '1 second' AS start_time,
                 EXTRACT(dayofweek FROM start_time)                AS weekday
 FROM staging_events WHERE page = 'NextSong';
 """)
+                     
+
+# NUMBER OF ROWS IN EACH TABLE
+# GET NUMBER OF ROWS IN EACH TABLE
+count_staging_events = ("""
+    SELECT COUNT(*) FROM staging_events;
+""")
+
+count_rows_staging_songs = ("""
+    SELECT COUNT(*) FROM staging_songs;
+""")
+
+count_rows_songplays = ("""
+    SELECT COUNT(*) FROM songplays;
+""")
+
+count_rows_users = ("""
+    SELECT COUNT(*) FROM users;
+""")
+
+count_rows_songs = ("""
+    SELECT COUNT(*) FROM songs;
+""")
+
+count_rows_artists = ("""
+    SELECT COUNT(*) FROM artists;
+""")
+
+count_rows_time = ("""
+    SELECT COUNT(*) FROM time;
+""")
+
+five_most_playable_artists = {
+    'question': 'What are the 5 most played artists?',
+    'query': """
+SELECT a.name, COUNT(sp.artist_id) AS number_of_plays
+FROM songplays AS sp
+JOIN artists as a ON (sp.artist_id = a.artist_id)
+GROUP BY (a.name, sp.artist_id)
+ORDER BY number_of_plays DESC
+LIMIT 5;
+    """
+}
+
+five_most_playable_songs = {
+    'question': 'What are the five most played songs?',
+    'query': """
+SELECT a.name, s.title, COUNT(sp.song_id) AS number_of_plays
+FROM songplays AS sp
+JOIN artists as a ON (sp.artist_id = a.artist_id)
+JOIN songs as s ON (sp.song_id = s.song_id)
+GROUP BY (a.name, s.title)
+ORDER BY number_of_plays DESC
+LIMIT 5;
+    """
+}
 
 
 # QUERY LISTS
@@ -209,3 +265,19 @@ insert_table_queries = [
     song_table_insert,
     songplay_table_insert
 ]
+
+count_rows_queries = [
+    count_staging_events,
+    count_rows_staging_songs,
+    count_rows_songplays,
+    count_rows_users,
+    count_rows_songs,
+    count_rows_artists,
+    count_rows_time
+]
+
+analytics_queries = [
+    five_most_playable_artists,
+    five_most_playable_songs
+]
+    
