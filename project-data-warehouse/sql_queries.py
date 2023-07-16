@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS staging_songs (
     song_id          VARCHAR,
     title            VARCHAR,
     duration         FLOAT,
-    year             INTEGER
+    year             SMALLINT
 );
 """)
 
@@ -57,11 +57,11 @@ songplay_table_create = ("""
 CREATE TABLE IF NOT EXISTS songplays (
     songplay_id BIGINT IDENTITY(0,1) PRIMARY KEY SORTKEY,
     start_time  TIMESTAMP NOT NULL,
-    user_id     VARCHAR NOT NULL DISTKEY,
+    user_id     BIGINT NOT NULL DISTKEY,
     level       VARCHAR NOT NULL,
     song_id     VARCHAR NOT NULL,
     artist_id   VARCHAR NOT NULL,
-    session_id  VARCHAR NOT NULL,
+    session_id  BIGINT NOT NULL,
     location    VARCHAR,
     user_agent  VARCHAR
 );
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS songplays (
 
 user_table_create = ("""
 CREATE TABLE IF NOT EXISTS users (
-    user_id    BIGINT IDENTITY(0,1) PRIMARY KEY SORTKEY,
+    user_id    BIGINT PRIMARY KEY SORTKEY,
     first_name VARCHAR NOT NULL,
     last_name  VARCHAR NOT NULL,
     gender     VARCHAR,
@@ -79,9 +79,9 @@ CREATE TABLE IF NOT EXISTS users (
 
 song_table_create = ("""
 CREATE TABLE IF NOT EXISTS songs (
-    song_id   BIGINT IDENTITY(0,1) PRIMARY KEY SORTKEY,
+    song_id   VARCHAR PRIMARY KEY SORTKEY,
     title     VARCHAR NOT NULL,
-    artist_id BIGINT NOT NULL DISTKEY,
+    artist_id VARCHAR NOT NULL DISTKEY,
     year      SMALLINT,
     duration  FLOAT
 );
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS songs (
 
 artist_table_create = ("""
 CREATE TABLE IF NOT EXISTS artists (
-    artist_id BIGINT IDENTITY(0,1) PRIMARY KEY SORTKEY,
+    artist_id VARCHAR PRIMARY KEY SORTKEY,
     name      VARCHAR NOT NULL,
     location  VARCHAR,
     lattitude FLOAT,
