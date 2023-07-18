@@ -177,5 +177,5 @@ Perform some **analytical queries**.
 
 
 ### 5.6. Teardown AWS Resources
-Run the `teardown_AWS_resources` to ***teardown*** **all AWS Resources** allocated before. Follow the instructions present in the notebook.
+Run the `teardown_AWS_resources.ipynb` to ***teardown*** **all AWS Resources** allocated before. Follow the instructions present in the notebook.
 
