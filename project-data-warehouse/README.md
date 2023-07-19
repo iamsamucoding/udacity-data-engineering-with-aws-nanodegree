@@ -172,7 +172,7 @@ Perform some **analytical queries**.
 |Dwight Yoakam|You're The One|37|
 |Ron Carter|I CAN'T GET STARTED|9|
 |Lonnie Gordon|Catch You Baby (Steve Pitron & Max Sanna Radio Edit)|9|
-|B.o.B|Nothin' On You \[feat. Bruno Mars\]| (Album Version)|8|
+|B.o.B|Nothin' On You \[feat. Bruno Mars\] (Album Version)|8|
 |Usher|Hey Daddy (Daddy's Home)|6|
 
 
