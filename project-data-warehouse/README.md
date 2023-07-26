@@ -1,4 +1,4 @@
-# Project: Build a Cloud Datta Warehouse on AWS
+# Project: Build a Cloud Data Warehouse on AWS
 <img src='./imgs/audio_wallpaper.jpg' style='width: 100%' />
 
 **Note:** This project is part of [Data Engineering with AWS nanodegree program](https://www.udacity.com/course/data-engineer-nanodegree--nd027).
@@ -14,7 +14,7 @@ The figure below, provided by the original Project Description on Udacity, shows
 
 <img src='./imgs/sparkify-s3-to-redshift-etl.png' style='width: 75%; display: block; margin: auto' />
 
-## Project Structure
+## 2. Project Structure
 ```
 project-data-warehouse
 ├── analytics.py                   # Script for analytics   
@@ -29,7 +29,7 @@ project-data-warehouse
 └── teardown_AWS_resources.ipynb   # Notebook to teardown all allocated AWS resources
 ```
 
-## 2. Project datasets
+## 3. Project datasets
 The data is divided into 3 datasets that reside in S3. Here are the S3 links for each:
 - **Song data: `s3://udacity-dend/song_data`:** static data about artists and songs Song-data example:
 
@@ -41,7 +41,7 @@ The data is divided into 3 datasets that reside in S3. Here are the S3 links for
 
 I provided a dataset overview in the `check_datasets.ipynb` jupyter notebook.
 
-## 3. Database Schema Design
+## 4. Database Schema Design
 **Staging Tables**: records the data from the files stored in S3.
 - `staging_events`
 - `staging_events`
@@ -58,12 +58,12 @@ I provided a dataset overview in the `check_datasets.ipynb` jupyter notebook.
 <img src='./imgs/ER diagram - Udacity Project Data Warehouse.png' style='width: 100%; display: block; margin: auto' />
 
 
-## 4. Preparing the workspace
-### 4.1. Create an AWS IAM user
+## 5. Preparing the workspace
+### 5.1. Create an AWS IAM user
 - Create an AWS IAM user
 - Save its `KEY` and `SECRECT`
 
-### 4.2. Prepare the _configuration file_
+### 5.2. Prepare the _configuration file_
 - Rename the `dwh_template.cfg` to `dwh.cfg`
   - It contains all configuration required to access and manage AWS resources.
   - This has been pre-populated with some configuration:
@@ -73,24 +73,24 @@ I provided a dataset overview in the `check_datasets.ipynb` jupyter notebook.
 - Insert your IAM user `KEY` and `SECRET` in the corresponding fields in `dwh.cfg`
 - Insert the database configuration (cluster name, database name, user, password) of your preference over `[DWH]`
   
-### 4.3. Prerequisites
+### 5.3. Prerequisites
 ```
 pip install boto3
 pip install pandas
 pip install redshift_connector
 ```
 
-## 5. How to run
-### 5.1. (Optional) Inspect the datasets
+## 6. How to run
+### 6.1. (Optional) Inspect the datasets
 The `check_datatasets.ipynb` notebook aims to inspect the dataset provided by the project. Although the project description on Udacity presents a lot of information about the datasets, such as their links and structures, I decided to double-check them to practice my coding skills with boto3 and S3.
 
-### 5.2. Setup AWS Resources
+### 6.2. Setup AWS Resources
 Run the `setup_AWS_resources.ipynb` to ***setup all*** **AWS Resources** required for this project. Follow the instructions present in the notebook.
 
 **Notes:**
 - I created a cluster in the _same region_ of the S3 bucket to make the **copying time** from the _files_ to the _staging tables_ ***faster***.
 
-### 5.3. Create Tables
+### 6.3. Create Tables
 `python create_tables.py`
 
 It will create ***all* tables** in your **Redshift cluster** required for this project.
@@ -124,7 +124,7 @@ WHERE it.table_schema='public';
 SELECT * FROM PG_TABLE_DEF WHERE schemaname='public';
 ```
 
-### 5.4. Perform ETL
+### 6.4. Perform ETL
 `python etl.py`
 
 Perform the **ETL** to the data. The script **copies** the data from the files in **S3 bucket** to the **staging tables** by the `COPY command`.
@@ -141,7 +141,7 @@ Perform the **ETL** to the data. The script **copies** the data from the files i
 - **Copying by *inserting* the *staging tables* to the *star schema*** was fast! When compared to the `COPY command`, **it was really faster**. This have a reason: we are dealing with files during `COPY command`, so we have a _big overhead opening and closing several files_ to load the data.
 
 
-### 5.5. Perform Analytics
+### 6.5. Perform Analytics
 `python analytics.py`
 
 Perform some **analytical queries**.
