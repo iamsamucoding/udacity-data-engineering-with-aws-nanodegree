@@ -37,5 +37,19 @@ Learn to create **cloud-based data warehouses**. Sharpen your data warehousing s
 - **[Check out this project!](./project-data-warehouse)**
 
 ## Course 3: Data Lake with Spark
+Learn about **Spark**, **Data Lakes**, and **Lakehouses** with _Amazon Web Services_.
+
+**Contents**
+- Introduction to Spark and Data Lakes
+- Big Data Ecosystem, Data Lakes, and Spark
+- Spark Essentials
+- Using Spark in AWS
+- Ingesting and Organizing Data in a Lakehouse
+
+**Project**
+- Build a **Data Lakehouse** in AWS with _Spark_ and _AWS Glue_
+  -  Build data pipelines that use _Apache Spark_ to store, filter, process, and transform data from _STEDI users_ for data analytics and machine learning applications.
+- **[Check out this project!](./project-spark-data-lake-aws)**
+
 
 ## Course 4: Data Pipelines with Airflow
