@@ -137,7 +137,7 @@ Perform the **ETL** to the data. The script **copies** the data from the files i
 - To convert a _big int_ to a **timestamp**, we can do:
     - `SELECT DISTINCT TIMESTAMP 'epoch' + ts/1000 * INTERVAL '1 second' AS start_time, ...`
     - E.g.: `1541121934796` ==> `2018-11-02 01:25:34`
-- Since I modeled the _column_ `ts` as a `BIGINT` in `staging_events`, and the corresponding _columns_ in the **star schema** as `TIMESTAMP`` data type (`start_time` in `songplays`, `start_time` in `time`), I had to do this conversion during **ETL SQL**.
+- Since I modeled the _column_ `ts` as a `BIGINT` in `staging_events`, and the corresponding _columns_ in the **star schema** as `TIMESTAMP` data type (`start_time` in `songplays`, `start_time` in `time`), I had to do this conversion during **ETL SQL**.
 - **Copying by *inserting* the *staging tables* to the *star schema*** was fast! When compared to the `COPY command`, **it was really faster**. This have a reason: we are dealing with files during `COPY command`, so we have a _big overhead opening and closing several files_ to load the data.
 
 
