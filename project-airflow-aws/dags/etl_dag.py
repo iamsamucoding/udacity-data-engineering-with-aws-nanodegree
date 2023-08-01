@@ -63,8 +63,7 @@ def etl():
         task_id='Load_songplays_fact_table',
         redshift_conn_id='redshift',
         table='songplays',
-        sql_query=SqlQueries.songplay_table_insert,
-        truncate_table=True
+        sql_query=SqlQueries.songplay_table_insert
     )
     
     load_songs_table = LoadDimensionOperator(
