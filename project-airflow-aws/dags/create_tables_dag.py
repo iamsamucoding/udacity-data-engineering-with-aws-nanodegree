@@ -6,15 +6,6 @@ from airflow.decorators import dag
 
 import sql_statements
 
-# Airflow DAGs and Plugins folder are set to the project root, so
-# this will be our reference root for relative imports
-# The `create_tables.sql` file is exactly in the project root thus
-# we can simply pass its filename so that any operator can correctly
-# open it.
-sql_statement_file='create_tables.sql'
-
-
-
 @dag(start_date=pendulum.now(),
      max_active_runs=1)
 def create_tables():
