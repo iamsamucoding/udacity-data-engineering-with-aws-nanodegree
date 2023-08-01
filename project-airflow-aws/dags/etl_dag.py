@@ -1,7 +1,9 @@
 from datetime import datetime, timedelta
 
 from airflow.operators.empty import EmptyOperator
-from operators import StageToRedshiftOperator
+from operators import StageToRedshiftOperator, LoadFactOperator
+
+from helpers import SqlQueries
 
 from airflow.models import Variable
 
@@ -28,19 +30,23 @@ def etl():
     s3_bucket = Variable.get('s3_bucket')
     log_data_prefix = Variable.get('s3_prefix_log_data')
     song_data_prefix = Variable.get('s3_prefix_song_data')
+    log_json_path_prefix = Variable.get('s3_prefix_log_json_path')
     region = Variable.get('region')
 
     begin_execution = EmptyOperator(task_id='Begin_execution')
 
     stage_events_to_redshift = StageToRedshiftOperator(
         task_id='Stage_events',
+        # connection id for Redshift configured in Airflow 
         redshift_conn_id='redshift',
+        # connection id for IAM configured in Airflow 
         aws_credentials_id='aws_credentials',
         table='staging_events',
         s3_bucket=s3_bucket,
         s3_key=log_data_prefix,
         region=region,
-        file_format='JSON')
+        file_format='JSON',
+        json_paths_format=log_json_path_prefix)
 
     stage_songs_to_redshift = StageToRedshiftOperator(
         task_id='Stage_songs',
@@ -52,10 +58,19 @@ def etl():
         region=region,
         file_format='JSON')
     
+    load_songplays_table = LoadFactOperator(
+        task_id='Load_songplays_fact_table',
+        redshift_conn_id='redshift',
+        table='songplays',
+        sql_query=SqlQueries.songplay_table_insert
+    )
 
     end_execution = EmptyOperator(task_id='End_execution')
 
     begin_execution >> [stage_events_to_redshift, stage_songs_to_redshift] >>\
+    load_songplays_table >>\
     end_execution
+    # begin_execution >> load_songplays_table >>\
+    # end_execution
 
 etl_dag = etl()
