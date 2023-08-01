@@ -26,7 +26,7 @@ class StageToRedshiftOperator(BaseOperator):
                  s3_key='',
                  region='us-east-1',
                  file_format='JSON',
-                 json_paths_format='',
+                 s3_json_paths_format='',
                  delimiter=",",
                  ignore_headers=1,
                  *args, **kwargs):
@@ -44,7 +44,7 @@ class StageToRedshiftOperator(BaseOperator):
         self.s3_key = s3_key
         self.region = region
         self.file_format = file_format
-        self.json_paths_format = json_paths_format
+        self.s3_json_paths_format = s3_json_paths_format
         self.delimiter = delimiter
         self.ignore_headers = ignore_headers
 
@@ -64,15 +64,20 @@ class StageToRedshiftOperator(BaseOperator):
             additional = f"IGNOREHEADER {self.ignore_headers} DELIMITER '{self.delimiter}"
         elif self.file_format.upper() == 'JSON':
             additional = "FORMAT AS JSON 'auto'"
-            if self.json_paths_format:
-                additional = f"FORMAT AS JSON '{self.json_paths_format}'"
+            if self.s3_json_paths_format:
+                rendered_json_paths_key = self.s3_json_paths_format.format(**context)
+                s3_json_paths = f"s3://{self.s3_bucket}/{rendered_json_paths_key}"
+
+                additional = f"FORMAT AS JSON '{s3_json_paths}'"
 
         else:
             self.log.info(f'*** ERROR: Invalid File Format: {self.file_format}. Try: CSV or JSON')
             return
 
-        rendered_key = self.s3_key.format(**context)
-        s3_path = f"s3://{self.s3_bucket}/{rendered_key}"
+        rendered_s3_key = self.s3_key.format(**context)
+        s3_path = f"s3://{self.s3_bucket}/{rendered_s3_key}"
+
+        
 
         formatted_sql = StageToRedshiftOperator.sql_copy_template.format(
             self.table,
