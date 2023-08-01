@@ -13,7 +13,6 @@ class StageToRedshiftOperator(BaseOperator):
             SECRET_ACCESS_KEY '{}'
             REGION '{}'
             TIMEFORMAT as 'epochmillisecs'
-            TRUNCATECOLUMNS BLANKSASNULL EMPTYASNULL
             {}
         """
     
@@ -66,7 +65,7 @@ class StageToRedshiftOperator(BaseOperator):
         elif self.file_format.upper() == 'JSON':
             additional = "FORMAT AS JSON 'auto'"
             if self.json_paths_format:
-                additional = f"FORMAT AS JSON {self.json_paths_format}"
+                additional = f"FORMAT AS JSON '{self.json_paths_format}'"
 
         else:
             self.log.info(f'*** ERROR: Invalid File Format: {self.file_format}. Try: CSV or JSON')
