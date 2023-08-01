@@ -1,7 +1,8 @@
 from datetime import datetime, timedelta
 
 from airflow.operators.empty import EmptyOperator
-from operators import StageToRedshiftOperator, LoadFactOperator
+from operators import StageToRedshiftOperator, LoadFactOperator, LoadDimensionOperator
+from operators import LoadDimensionOperator
 
 from helpers import SqlQueries
 
@@ -10,7 +11,7 @@ from airflow.models import Variable
 import logging
 
 
-from airflow.decorators import dag, task
+from airflow.decorators import dag
 
 default_args = {
     'owner': 'Sparkify',
@@ -62,15 +63,50 @@ def etl():
         task_id='Load_songplays_fact_table',
         redshift_conn_id='redshift',
         table='songplays',
-        sql_query=SqlQueries.songplay_table_insert
+        sql_query=SqlQueries.songplay_table_insert,
+        truncate_table=True
+    )
+    
+    load_songs_table = LoadDimensionOperator(
+        task_id='Load_song_dim_table',
+        redshift_conn_id='redshift',
+        table='songs',
+        sql_query=SqlQueries.song_table_insert,
+        truncate_table=True
+    )
+    
+    load_users_table = LoadDimensionOperator(
+        task_id='Load_user_dim_table',
+        redshift_conn_id='redshift',
+        table='users',
+        sql_query=SqlQueries.user_table_insert,
+        truncate_table=True
+    )
+    
+    load_artist_table = LoadDimensionOperator(
+        task_id='Load_artist_dim_table',
+        redshift_conn_id='redshift',
+        table='artists',
+        sql_query=SqlQueries.artist_table_insert,
+        truncate_table=True
+    )
+    
+    load_time_table = LoadDimensionOperator(
+        task_id='Load_time_dim_table',
+        redshift_conn_id='redshift',
+        table='time',
+        sql_query=SqlQueries.time_table_insert,
+        truncate_table=True
     )
 
     end_execution = EmptyOperator(task_id='End_execution')
 
+
     begin_execution >> [stage_events_to_redshift, stage_songs_to_redshift] >>\
     load_songplays_table >>\
+    [load_songs_table, load_users_table, load_artist_table, load_time_table] >>\
     end_execution
-    # begin_execution >> load_songplays_table >>\
+    # begin_execution >> [load_songs_table, load_users_table, load_artist_table, load_time_table] >>\
     # end_execution
 
 etl_dag = etl()
