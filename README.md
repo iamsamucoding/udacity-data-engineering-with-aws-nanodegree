@@ -20,8 +20,8 @@ Learn to create **relational** and **NoSQL data models** to fit the diverse need
 - NoSQL Data Models
 
 **Projects**
-- Data Modeling with Postgres
 - Data Modeling with Apache Cassandra
+- **[Check out this project!](./project-apache-cassandra)**
 
 
 ## Course 2: Cloud Data Warehouses
