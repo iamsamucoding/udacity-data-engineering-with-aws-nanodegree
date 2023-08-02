@@ -37,7 +37,7 @@ Learn to create **cloud-based data warehouses**. Sharpen your data warehousing s
 - **[Check out this project!](./project-data-warehouse)**
 
 ## Course 3: Data Lake with Spark
-Learn about **Spark**, **Data Lakes**, and **Lakehouses** with _Amazon Web Services_.
+Learn about **Spark**, **Data Lakes**, and **Lakehouses** with **Amazon Web Services**.
 
 **Contents**
 - Introduction to Spark and Data Lakes
