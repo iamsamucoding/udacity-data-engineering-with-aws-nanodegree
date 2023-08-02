@@ -16,7 +16,7 @@ from airflow.decorators import dag
 default_args = {
     'owner': 'Sparkify',
     'depends_on_past': False,
-    'start_date': datetime(2018, 11, 1),
+    'start_date': datetime(2023, 7, 31),
     'retries': 3,
     'retry_delay': timedelta(minutes=5),
     'catchup': False,
@@ -25,7 +25,7 @@ default_args = {
 
 
 @dag(default_args=default_args,
-     schedule_interval='0 * * * *')
+     schedule_interval='@hourly')
 def etl():
     # airflow variables
     s3_bucket = Variable.get('s3_bucket')
@@ -70,32 +70,28 @@ def etl():
         task_id='Load_song_dim_table',
         redshift_conn_id='redshift',
         table='songs',
-        sql_query=SqlQueries.song_table_insert,
-        truncate_table=True
+        sql_query=SqlQueries.song_table_insert
     )
     
     load_users_table = LoadDimensionOperator(
         task_id='Load_user_dim_table',
         redshift_conn_id='redshift',
         table='users',
-        sql_query=SqlQueries.user_table_insert,
-        truncate_table=True
+        sql_query=SqlQueries.user_table_insert
     )
     
     load_artist_table = LoadDimensionOperator(
         task_id='Load_artist_dim_table',
         redshift_conn_id='redshift',
         table='artists',
-        sql_query=SqlQueries.artist_table_insert,
-        truncate_table=True
+        sql_query=SqlQueries.artist_table_insert
     )
     
     load_time_table = LoadDimensionOperator(
         task_id='Load_time_dim_table',
         redshift_conn_id='redshift',
         table='time',
-        sql_query=SqlQueries.time_table_insert,
-        truncate_table=True
+        sql_query=SqlQueries.time_table_insert
     )
 
     data_quality_checks = DataQualityOperator(

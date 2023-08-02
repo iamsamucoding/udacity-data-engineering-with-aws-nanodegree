@@ -11,7 +11,7 @@ class LoadDimensionOperator(BaseOperator):
                  redshift_conn_id='',
                  table='',
                  sql_query='',
-                 truncate_table=True,
+                 mode='delete-load',
                  *args, **kwargs):
 
         super(LoadDimensionOperator, self).__init__(*args, **kwargs)
@@ -19,12 +19,12 @@ class LoadDimensionOperator(BaseOperator):
         self.redshift_conn_id = redshift_conn_id
         self.table = table
         self.sql_query = sql_query
-        self.truncate_table = truncate_table
+        self.mode = mode
 
     def execute(self, context):
         redshift = PostgresHook(postgres_conn_id=self.redshift_conn_id)
 
-        if self.truncate_table:
+        if self.mode == 'delete-load':
             self.log.info("\n\n### Deleting data from Dimensional Table")
             redshift.run(f"TRUNCATE {self.table}")
 
