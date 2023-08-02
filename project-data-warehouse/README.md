@@ -1,7 +1,7 @@
 # Project: Build a Cloud Data Warehouse on AWS
 <img src='./imgs/audio_wallpaper.jpg' style='width: 100%' />
 
-**Note:** This project is part of [Data Engineering with AWS nanodegree program](https://www.udacity.com/course/data-engineer-nanodegree--nd027).
+> **Note:** This project is part of [Data Engineering with AWS nanodegree program](https://www.udacity.com/course/data-engineer-nanodegree--nd027).
 
 
 ## 1. Project Description
@@ -30,13 +30,13 @@ project-data-warehouse
 ```
 
 ## 3. Project datasets
-The data is divided into 3 datasets that reside in S3. Here are the S3 links for each:
+The data is divided into 3 datasets that reside in S3 (`us-west-2` region). Here are the S3 links for each:
 - **Song data: `s3://udacity-dend/song_data`:** static data about artists and songs Song-data example:
 
 `{"num_songs": 1, "artist_id": "ARJIE2Y1187B994AB7", "artist_latitude": null, "artist_longitude": null, "artist_location": "", "artist_name": "Line Renaud", "song_id": "SOUPIRU12A6D4FA1E1", "title": "Der Kleine Dompfaff", "duration": 152.92036, "year": 0}`
 - **Log data: `s3://udacity-dend/log_data`**: event data of service usage e.g. who listened what song, when, where, and with which client
 <img src='./imgs/log-data.png' style='width: 75%; display: block; margin: auto' />
-- This third file `s3://udacity-dend/log_json_path.json` contains the meta information that is required by AWS **to correctly load** `s3://udacity-dend/log_data` usint the `COPY command`.
+- This third file `s3://udacity-dend/log_json_path.json` contains the meta information that is required by AWS **to correctly load** `s3://udacity-dend/log_data` using the `COPY command`.
 <img src='./imgs/log-json-path.png' style='display: block; margin: auto' />
 
 I provided a dataset overview in the `check_datasets.ipynb` jupyter notebook.
