@@ -53,3 +53,16 @@ Learn about **Spark**, **Data Lakes**, and **Lakehouses** with _Amazon Web Servi
 
 
 ## Course 4: Data Pipelines with Airflow
+Learn about how to implement _Data Pipelines_ with **Airflow** and **AWS**.
+
+**Contents**
+- Introduction to Automating Data Pipelines
+- Data Pipelines
+- Airflow and AWS
+- Data Quality
+- Production Data Pipelines
+
+**Project**
+- Build a Data Pipeline with **Airflow** that performs ETL on AWS.
+- **[Check out this project!](./project-airflow-aws/)**
+
