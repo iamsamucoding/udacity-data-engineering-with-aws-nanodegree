@@ -98,17 +98,17 @@ This **stage operator** is be able to load any _CSV and JSON formatted files_ fr
 
 This operator transforms and loads data from the **staging tables** to a **fact table**. **Fact tables** are usually _so massive_ that they should only allow _append_ new data into it.
 
-- **`Load_songplays_fact_table`:** transform and load data from the **staging tables** to the **fact table** `songplays`.
+- **`Load_songplays_fact_table`:** transform and load data from the **staging tables** to the **fact table** `songplays`
 
 ### Dimension Operator
 - **File:** `./plugins/operators/load_dimension.py`
 
 This operator transforms and loads data from the **staging tables** to a **dimension table**. **Dimension loads** are often done with the _truncate-insert_ pattern where the target table is emptied before the load. Thus, we provided a parameter that allows switching between _insert modes_ when loading dimensions.
 
-- **`Load_artist_dim_table`:** transform and load data from the **staging tables** to the **dimension table** `artists`.
-- **`Load_song_dim_table`:** transform and load data from the **staging tables** to the **dimension table** `songs`.
-- **`Load_time_dim_table`:** transform and load data from the **staging tables** to the **dimension table** `time`.
-- **`Load_user_dim_table`:** transform and load data from the **staging tables** to the **dimension table** `users`.
+- **`Load_artist_dim_table`:** transform and load data from the **staging tables** to the **dimension table** `artists`
+- **`Load_song_dim_table`:** transform and load data from the **staging tables** to the **dimension table** `songs`
+- **`Load_time_dim_table`:** transform and load data from the **staging tables** to the **dimension table** `time`
+- **`Load_user_dim_table`:** transform and load data from the **staging tables** to the **dimension table** `users`
 
 
 ### Data Quality Operator
@@ -118,4 +118,4 @@ This final operator performs **quality checks** to our final data:
 - Check if the tables are not empty
 - Check if some NOT NULL columns do not have NULL values
 
-- **`Run_data_quality_checks`:** run the data quality checks to the final tables.****
+- **`Run_data_quality_checks`:** run the data quality checks to the final tables.

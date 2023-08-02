@@ -7,12 +7,15 @@
 ## 1. Project Description
 _Sparkify_ is a music streaming startup with a growing user base and song database.
 
-The user activity and songs metadata are stored as json files in **AWS S3**. **The primary goal of this project is to build an efficient **ETL (Extract, Transform, Load) pipeline.**
+The user activity and songs metadata are stored as json files in **AWS S3**. **The primary goal of this project is to build an efficient ETL (Extract, Transform, Load) pipeline.**
 This pipeline will _extract_ the data from **AWS S3**, _stage_ it in **AWS Redshift**, and _transform it_ into a set of tables **(fact and dimensional)** in _star schema_. These tables will empower the analytics team to continue discovering valuable insights regarding the songs that Sparkify's users are listening to.
 
 The figure below, provided by the original Project Description on Udacity, shows the proposed System Architecture for AWS S3 to Redshift ETL.
 
 <img src='./imgs/sparkify-s3-to-redshift-etl.png' style='width: 75%; display: block; margin: auto' />
+
+### 🎯 Goal
+Build an efficient ETL (Extract, Transform, Load) pipeline with **AWS Redshift**.
 
 ## 2. Project Structure
 ```

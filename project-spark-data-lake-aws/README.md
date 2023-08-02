@@ -15,7 +15,7 @@ The **Step Trainer** is just a _motion sensor_ that records the _distance of the
 
 The STEDI team wants to use the motion sensor data to train a machine learning model to detect steps accurately in real-time. Some of the early adopters have agreed to _share their data for research purposes_, so that **privacy** will be a **primary consideration** in deciding _what data can be used._ **Only these customers’ Step Trainer and accelerometer data should be used in the training data for the machine learning model.**
 
-### Objective
+### 🎯 Goal
 Develop a _data engineering solution_ that _extracts_ the data produced by the STEDI Step Trainer sensors and the mobile app, and **curate** them into a **data **lakehouse** solution on AWS** so that Data Scientists can train the learning model.
 
 ## 2. Project Structure

@@ -1,7 +1,7 @@
 # Udacity Data Engineering with AWS Nanodegree Program
-My projects from the Data Engineer with AWS Nanodegree Program by Udacity. 
+My projects from the [Data Engineer with AWS Nanodegree Program by Udacity](https://www.udacity.com/course/data-engineer-nanodegree--nd027). 
 
-This program aimed to learn to_design data models, build data warehouses and data lakes, automate data pipelines, and work with massive datasets.
+This program aimed to learn to design data models, build data warehouses and data lakes, automate data pipelines, and work with massive datasets.
 
 - Create user-friendly relational and NoSQL data models
 - Create scalable and efficient data warehouses
