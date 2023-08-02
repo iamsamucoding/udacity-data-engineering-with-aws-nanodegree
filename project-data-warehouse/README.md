@@ -1,5 +1,5 @@
 # Project: Build a Cloud Data Warehouse on AWS
-<img src='./imgs/audio_wallpaper.jpg' style='width: 100%' />
+<img src='./imgs/audio_wallpaper_data_warehouse.jpg' style='width: 100%' />
 
 > **Note:** This project is part of [Data Engineering with AWS nanodegree program](https://www.udacity.com/course/data-engineer-nanodegree--nd027).
 

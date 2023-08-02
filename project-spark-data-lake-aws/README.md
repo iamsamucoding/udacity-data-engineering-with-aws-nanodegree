@@ -1,6 +1,6 @@
 # Project: STEDI Human Balance Analytics - Data Lake and Spark on AWS
 
-<img src='./imgs/wallpaper.jpg' style='width: 100%' />
+<img src='./imgs/wallpaper_tech.jpg' style='width: 100%' />
 
 **Note:** This project is part of [Data Engineering with AWS nanodegree program](https://www.udacity.com/course/data-engineer-nanodegree--nd027).
 
